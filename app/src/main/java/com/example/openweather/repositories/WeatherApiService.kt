@@ -1,7 +1,7 @@
 package com.example.openweather.repositories
 
 import com.example.kamino.common.Constants.Companion.BASE_URL
-import com.example.kamino.datamodel.WeatherModel
+import com.example.kamino.datamodel.CityModel
 import io.reactivex.Observable
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -12,8 +12,7 @@ import retrofit2.http.*
 
 interface WeatherApiService {
     @GET(BASE_URL)
-    fun getKaminoPlanet(): Observable<Response<WeatherModel.KaminoPlanet>>
-
+    fun getWeatherData(): Observable<Response<CityModel>>
 
 
     companion object {
