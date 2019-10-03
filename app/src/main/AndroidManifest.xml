@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".ui.ThirdScreen"></activity>
         <activity android:name=".ui.FirstScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,9 +20,7 @@
         <activity
             android:name=".ui.SecondScreenActivity"
             android:label="@string/title_activity_second_screen"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
-
-
 
 </manifest>

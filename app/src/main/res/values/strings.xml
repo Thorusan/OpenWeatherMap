@@ -5,4 +5,7 @@
     <string name="cancel">CANCEL</string>
     <string name="finish">FINISH</string>
     <string name="enter_city_name">Enter city name:</string>
+    <string name="current_temperature">Current temperature</string>
+    <string name="humidity">Humidity</string>
+    <string name="description">Description:</string>
 </resources>

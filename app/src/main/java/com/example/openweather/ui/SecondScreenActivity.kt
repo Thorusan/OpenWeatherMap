@@ -44,11 +44,12 @@ class SecondScreenActivity : AppCompatActivity() {
             citiesList.add(cityObject)
             val citiesArrayString = Gson().toJson(citiesList)
             saveCityToSharedPreferences(citiesArrayString)
+            this.finish();
         }
     }
 
     private fun saveCityToSharedPreferences(arrayString: String) {
-        val sharedPref = this.getPreferences(Context.MODE_PRIVATE) ?: return
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(this) ?: return
         with(sharedPref.edit()) {
             putString("cities", arrayString)
             commit()
@@ -56,12 +57,15 @@ class SecondScreenActivity : AppCompatActivity() {
     }
 
     private fun getCityFromSharedPreferences(): ArrayList<CityModel> {
-        val prefs = this.getPreferences(Context.MODE_PRIVATE)
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
         val gson = Gson()
         val json = prefs.getString("cities", null)
         val type = object : TypeToken<ArrayList<CityModel>>() {
 
         }.type
+        if (json == null) {
+            return ArrayList()
+        }
         return gson.fromJson(json, type)
     }
 

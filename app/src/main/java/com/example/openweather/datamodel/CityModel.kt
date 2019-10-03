@@ -1,14 +1,16 @@
 package com.example.kamino.datamodel
 
-import com.google.gson.annotations.SerializedName
-
 class CityModel {
 
-        private var name: String? = null
+     var name: String? = null
+        get() = field
+        set(value) {
+            field = value
+        }
 
-     constructor(cityName: String) {
-         name = cityName
-     }
+    constructor(cityName: String) {
+        name = cityName
+    }
 
 
 }
