@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">OpenWeather</string>
+    <string name="add_city">Add city</string>
+</resources>
