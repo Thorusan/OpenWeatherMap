@@ -9,16 +9,15 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
-
-import com.example.kamino.datamodel.CityModel
 import com.example.openweather.R
+import com.example.openweather.datamodel.CityDataResponse
 import com.google.android.material.card.MaterialCardView
 import java.util.*
 
 class CitiesListAdapter(
     val context: Context,
-    val citiesList: ArrayList<CityModel>,
-    val onChooseCity: (CityModel) -> Unit
+    val citiesList: ArrayList<CityDataResponse.City>,
+    val onChooseCity: (CityDataResponse.City) -> Unit
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -58,7 +57,7 @@ class CitiesListAdapter(
             ButterKnife.bind(this, view)
         }
 
-        fun bindCity(cityModel: CityModel) {
+        fun bindCity(cityModel: CityDataResponse.City) {
             textCityName.text = cityModel.name
         }
     }

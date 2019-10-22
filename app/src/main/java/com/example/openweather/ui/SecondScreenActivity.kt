@@ -1,25 +1,19 @@
 package com.example.openweather.ui
 
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kamino.datamodel.CityModel
 import com.example.openweather.R
+import com.example.openweather.datamodel.CityDataResponse
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-
 import kotlinx.android.synthetic.main.activity_second_screen.*
-import android.preference.PreferenceManager
-import android.content.SharedPreferences
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
 
 
 class SecondScreenActivity : AppCompatActivity() {
-    var citiesList: ArrayList<CityModel> = arrayListOf<CityModel>()
+    private var citiesList: ArrayList<CityDataResponse.City> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +21,15 @@ class SecondScreenActivity : AppCompatActivity() {
 
         //ButterKnife.bind(this)
         //getCityFromSharedPref
-        citiesList = getCityFromSharedPreferences()
+        getCitiesFromBundle()
         registerListeners()
+    }
+
+    private fun getCitiesFromBundle() {
+        val bundle: Bundle? = intent.extras
+        if (bundle != null) {
+            citiesList = bundle.getParcelableArrayList("citiesList");
+        }
     }
 
     private fun registerListeners() {
@@ -40,10 +41,14 @@ class SecondScreenActivity : AppCompatActivity() {
 
         btn_finish.setOnClickListener {
             val cityName: String = edit_city_name.text.toString()
-            val cityObject = CityModel(cityName) // create l1 object of Lamp class
+            val cityObject = CityDataResponse.City(cityName) // create l1 object of Lamp class
             citiesList.add(cityObject)
             val citiesArrayString = Gson().toJson(citiesList)
-            saveCityToSharedPreferences(citiesArrayString)
+            //saveCityToSharedPreferences(citiesArrayString)
+            val resultIntent = Intent()
+            resultIntent.putExtra("saved_city", cityObject)
+            setResult(101, resultIntent)
+
             this.finish();
         }
     }
